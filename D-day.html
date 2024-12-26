@@ -4,131 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
-    <title>Document</title>
+    <title>Countdown Timer</title>
     <style>
+        /* General styles */
+        body {
+            background-color: white;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-body{
-    background-color: white;
-}
-  
-#timer {
-  color: #eeeeee;
-  text-align: center;
-  text-transform: uppercase;
-  font-family: 'Lato', sans-serif;
-  font-size: .7em;
-  letter-spacing: 5px;
-}
+        #timer {
+            color: #eeeeee;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.7em;
+            letter-spacing: 5px;
+        }
 
-.days, .hours, .minutes, .seconds {
-  display: inline-block;
-  padding: 20px;
-  width: 100px;
-  border-radius: 5px;
-}
+        .days, .hours, .minutes, .seconds {
+            display: inline-block;
+            padding: 20px;
+            width: 100px;
+            border-radius: 5px;
+        }
 
-.days {
-  background: #EF2F3C;
-}
+        .days {
+            background: #EF2F3C;
+        }
 
-.hours {
-  background: #eeeeee;
-  color: #183059;
-}
+        .hours {
+            background: #eeeeee;
+            color: #183059;
+        }
 
-.minutes {
-  background: #276FBF;
-}
+        .minutes {
+            background: #276FBF;
+        }
 
-.seconds {
-  background: #F0A202;
-}
+        .seconds {
+            background: #F0A202;
+        }
 
-.numbers {
-  font-family: 'Montserrat', sans-serif;
-  color:  #183059;
-  font-size: 4em;
-  text-align: center;
-}
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            color: #183059;
+            font-size: 4em;
+            text-align: center;
+        }
 
-.white {
-  position: absolute;
-  background:  #eeeeee;
-  height: 85px;
-  width: 75px;
-  left: 30%;
-  top: 2%;
-}
+        /* Decorative elements */
+        .white {
+            position: absolute;
+            background: #eeeeee;
+            height: 85px;
+            width: 75px;
+            left: 30%;
+            top: 2%;
+        }
 
-.red {
-  position: absolute;
-  background:  #EF2F3C;
-  left: 18%;
-  top: 9%;
-  height: 65px;
-  width: 70px;
- 
-}
+        .red {
+            position: absolute;
+            background: #EF2F3C;
+            left: 18%;
+            top: 9%;
+            height: 65px;
+            width: 70px;
+        }
 
-.blue {
-  position: absolute;
-  background:  #276FBF;
-  height: 80px;
-  width: 80px;
-  left: 60%;
-  top: 5%;
-
-
-}
-
-
+        .blue {
+            position: absolute;
+            background: #276FBF;
+            height: 80px;
+            width: 80px;
+            left: 60%;
+            top: 5%;
+        }
     </style>
 </head>
 <body>
-    
-<div id="timer">
+    <!-- Countdown Timer Container -->
+    <div id="timer">
+        <div class="days">
+            <div id="days" class="numbers"></div>days
+        </div>
+        <div class="hours">
+            <div id="hours" class="numbers"></div>hours
+        </div>
+        <div class="minutes">
+            <div id="minutes" class="numbers"></div>minutes
+        </div>
+        <div class="seconds">
+            <div id="seconds" class="numbers"></div>seconds
+        </div>
+    </div>
 
-    <div class="days"> 
-        <div id="days" class="numbers "> </div>days</div> 
-      <div class="hours"> 
-        <div  id="hours" class="numbers"> </div>hours</div> 
-      <div class="minutes"> 
-        <div  id="minutes" class="numbers"> </div>minutes</div> 
-      <div   class="seconds"> 
-        <div id="seconds" class="numbers"> </div>seconds</div> 
-      </div>
+    <!-- JavaScript for Countdown Timer -->
+    <script>
+        // Target date for the countdown
+        const myDate = new Date('Dec 31, 2025 00:00:00');
 
-</div>
+        // Countdown logic
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = myDate - now;
 
+            if (diff < 0) {
+                // Stop the timer if the countdown is over
+                clearInterval(timer);
+                document.getElementById("timer").innerHTML = "Countdown Complete!";
+                return;
+            }
+
+            // Calculate remaining time
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Display the remaining time
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }, 1000); // Update every second
+    </script>
 </body>
-<script>
-    const year = new Date().getFullYear();
-const myDate = new Date('Dec 31, 2025 00:00:00');
-console.log(myDate);
-
-// countdown
-let timer = setInterval(function() {
-
-  // get today's date
-  const today = new Date().getTime();
-
-  // get the difference
-  const diff = myDate - today;
-
-  // math
-  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  // display
-  document.getElementById("days").innerHTML=days
-  document.getElementById("hours").innerHTML=hours
-  document.getElementById("minutes").innerHTML=minutes
-  document.getElementById("seconds").innerHTML=seconds
-
-
-
-}, 1);
-</script>
 </html>
